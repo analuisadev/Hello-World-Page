@@ -1,0 +1,47 @@
+
+setTimeout(function(){
+	 
+  var msie6 = $.browser == 'msie' && $.browser.version < 7;
+  if (!msie6) {
+	var top = $('#fijame').offset().top;
+	var altura = $('#fijame').innerHeight();
+	//alert(top + "_" + altura);
+	var colIzquierda = $('#colIzquierda').innerHeight();
+	var colDerecha = $('#colDerecha').innerHeight();
+	//alert(colIzquierda + "---" + colDerecha);
+	var limite = $('#piedepagina').offset().top;
+	altura = $('#fijame').innerHeight();
+	colDerecha = $('#colDerecha').innerHeight();
+		
+	  if (colIzquierda<colDerecha) {
+		  var y = $(this).scrollTop();
+		  var controlar = true;
+		  if ((y+altura+25)>=limite) { $('#fijame').removeClass('fixed'); document.getElementById('fijame').style.top = (limite-top-altura-25) + 'px'; controlar = false; } 
+		  else { controlar = true; document.getElementById('fijame').style.top = '5px'; }
+		  if (controlar) {	  
+			  if (y >= top) { $('#fijame').addClass('fixed'); }
+			  else { $('#fijame').removeClass('fixed'); }
+		  }
+		  //alert(document.getElementById('fijame').style.top);
+	  }
+	$(window).scroll(function (event) {
+		altura = $('#fijame').innerHeight();
+		colIzquierda = $('#colIzquierda').innerHeight();
+		colDerecha = $('#colDerecha').innerHeight();
+		
+	  if (colIzquierda<colDerecha) {
+		  
+		  var y = $(this).scrollTop();
+		  var controlar = true;
+		  //alert(y + "_" + altura + "_" + limite);
+		  if ((y+altura+25)>=limite) { $('#fijame').removeClass('fixed'); document.getElementById('fijame').style.top = (limite-top-altura-25) + 'px'; controlar = false; } 
+		  else { controlar = true; document.getElementById('fijame').style.top = '5px'; }
+		  if (controlar) {	  
+			  if (y >= top) { $('#fijame').addClass('fixed'); }
+			  else { $('#fijame').removeClass('fixed'); }
+		  }
+		  //alert(document.getElementById('fijame').style.top);
+	  }
+	});
+  }
+},200);
